@@ -1,0 +1,16 @@
+[
+{
+  "modid": "radpack",
+  "name": "RadPack",
+  "description": "Extra Blocks by RadMan63",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["RadMan63"],
+  "credits": "Me",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

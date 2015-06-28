@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "radpack:dishwasher_silver" },
+        "facing=south": { "model": "radpack:dishwasher_silver", "y": 180},
+        "facing=west":  { "model": "radpack:dishwasher_silver", "y": 270},
+        "facing=east":  { "model": "radpack:dishwasher_silver", "y": 90 }
+    }
+}

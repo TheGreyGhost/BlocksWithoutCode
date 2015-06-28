@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+      "particle": "radpack:blocks/dishwasher_silver",
+      "down": "radpack:blocks/dishwasher_silver_bottom",
+      "up": "radpack:blocks/dishwasher_silver_top",
+      "north": "radpack:blocks/dishwasher_silver",
+      "east": "radpack:blocks/dishwasher_silver_side",
+      "south": "radpack:blocks/dishwasher_silver_side",
+      "west": "radpack:blocks/dishwasher_silver_side"
+    }
+}

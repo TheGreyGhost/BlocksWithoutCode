@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "radpack:blocktranslucent1model" },
+        "facing=south": { "model": "radpack:blocktranslucent1model", "y": 180},
+        "facing=west":  { "model": "radpack:blocktranslucent1model", "y": 270},
+        "facing=east":  { "model": "radpack:blocktranslucent1model", "y": 90 }
+    }
+}

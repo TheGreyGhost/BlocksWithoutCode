@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "radpack:blockcutout1model" },
+        "facing=south": { "model": "radpack:blockcutout1model", "y": 180},
+        "facing=west":  { "model": "radpack:blockcutout1model", "y": 270},
+        "facing=east":  { "model": "radpack:blockcutout1model", "y": 90 }
+    }
+}

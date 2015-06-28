@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "radpack:blocks/mbe01_block_simple_face0",
+    "up": "radpack:blocks/mbe01_block_simple_face1",
+    "north": "radpack:blocks/mbe01_block_simple_face2",
+    "east": "radpack:blocks/mbe01_block_simple_face5",
+    "south": "radpack:blocks/mbe01_block_simple_face3",
+    "west": "radpack:blocks/mbe01_block_simple_face4",
+    "particle": "radpack:blocks/mbe01_block_simple_face0"
+  }
+}
