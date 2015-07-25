@@ -18,12 +18,13 @@ public abstract class CommonProxy
   public BlockCutout [] blockCutouts;
   public BlockSolid [] blockSolids;
   public BlockTranslucent [] blockTranslucents;
-  public static CreativeTabs customTab;               // will hold our first custom creative tab
-  public static Item itemTabIcon;             // create a dummy item for our creative tab
+  public static CreativeTabs [] customTabs;               // will hold our creative tabs
+  public static Item [] itemTabIcons;             // create a dummy item for each creative tab
 
   public static int blockSolidCount = 0;
   public static int blockCutoutCount = 0;
   public static int blockTranslucentCount = 0;
+  public static int creativeTabCount = 0;
 
   /**
    * Run before anything else. Read your config, create blocks, items, etc, and register them with the GameRegistry
@@ -36,6 +37,8 @@ public abstract class CommonProxy
     System.out.println("Number of cutout blocks:" + numberOfBlockCutouts);
     String numberOfBlockTranslucent = LanguageRegistry.instance().getStringLocalization("config.blocktranslucents");
     System.out.println("Number of translucent blocks:" + numberOfBlockTranslucent);
+    String numberOfCreativeTabs = LanguageRegistry.instance().getStringLocalization("config.creativetabs");
+    System.out.println("Number of creative tabs:" + numberOfCreativeTabs);
 
     try {
       blockSolidCount = Integer.valueOf(numberOfBlockSolids);
@@ -49,40 +52,75 @@ public abstract class CommonProxy
       blockTranslucentCount = Integer.valueOf(numberOfBlockTranslucent);
     } catch (NumberFormatException e) {
     }
+    try {
+      creativeTabCount = Integer.valueOf(numberOfCreativeTabs);
+    } catch (NumberFormatException e) {
+    }
     blockSolids = new BlockSolid[blockSolidCount];
     blockCutouts = new BlockCutout[blockCutoutCount];
     blockTranslucents = new BlockTranslucent[blockTranslucentCount];
+    customTabs = new CreativeTabs[creativeTabCount];
+    itemTabIcons = new Item[creativeTabCount];
 
-    // each instance of your item should have a name that is unique within your mod.  use lower case.
-    itemTabIcon = new Item().setUnlocalizedName("radpacktabicon");
-    GameRegistry.registerItem(itemTabIcon, "radpacktabicon");
+    for (int i = 0; i < creativeTabCount; ++i) {
+      String tabName = "radpacktab" + (i + 1);
+      String tabIconName = "radpacktabicon" + (i + 1);
+      final Item itemTabIcon = new Item().setUnlocalizedName(tabIconName);
+      GameRegistry.registerItem(itemTabIcon, tabIconName);
 
-    customTab = new CreativeTabs("radpacktab") {
-      @Override
-      @SideOnly(Side.CLIENT)
-      public Item getTabIconItem() {
-        return itemTabIcon;
-      }
-    };
+      CreativeTabs creativeTab = new CreativeTabs(tabName) {
+        @Override
+        @SideOnly(Side.CLIENT)
+        public Item getTabIconItem() {
+          return itemTabIcon;
+        }
+      };
+      customTabs[i] = creativeTab;
+      itemTabIcons[i] = itemTabIcon;
+    }
 
     for (int i = 0; i < blockSolidCount; ++i) {
       String blockName = "blocksolid" + (i + 1);
-      blockSolids[i] = (BlockSolid)(new BlockSolid().setUnlocalizedName(blockName).setCreativeTab(customTab));
+      CreativeTabs creativeTab = getTab(blockName);
+      blockSolids[i] = (BlockSolid)(new BlockSolid().setUnlocalizedName(blockName).setCreativeTab(creativeTab));
       GameRegistry.registerBlock(blockSolids[i], blockName);
     }
 
     for (int i = 0; i < blockCutoutCount; ++i) {
       String blockName = "blockcutout" + (i + 1);
-      blockCutouts[i] = (BlockCutout)(new BlockCutout().setUnlocalizedName(blockName).setCreativeTab(customTab));
+      CreativeTabs creativeTab = getTab(blockName);
+      blockCutouts[i] = (BlockCutout)(new BlockCutout().setUnlocalizedName(blockName).setCreativeTab(creativeTab));
       GameRegistry.registerBlock(blockCutouts[i], blockName);
     }
 
     for (int i = 0; i < blockTranslucentCount; ++i) {
       String blockName = "blocktranslucent" + (i + 1);
-      blockTranslucents[i] = (BlockTranslucent)(new BlockTranslucent().setUnlocalizedName(blockName).setCreativeTab(customTab));
+      CreativeTabs creativeTab = getTab(blockName);
+      blockTranslucents[i] = (BlockTranslucent)(new BlockTranslucent().setUnlocalizedName(blockName).setCreativeTab(creativeTab));
       GameRegistry.registerBlock(blockTranslucents[i], blockName);
     }
+  }
 
+  // get the creative block for a tab.  If error or none, use Blocks tab
+  private CreativeTabs getTab(String blockName)
+  {
+    int tabNumber = getTabNumber(blockName);
+    if (tabNumber <= 0 || tabNumber > creativeTabCount) {
+      return CreativeTabs.tabBlock;
+    }
+    return customTabs[tabNumber - 1];
+  }
+
+  // get the number of the tab; 0 means no number allocated
+  private int getTabNumber(String blockName) {
+    String configKey = "tile." + blockName + ".tab";
+    String tabNumberString = LanguageRegistry.instance().getStringLocalization(configKey);
+    int tabNumber = 0;
+    try {
+      tabNumber = Integer.valueOf(tabNumberString);
+    } catch (NumberFormatException e) {
+    }
+    return tabNumber;
   }
 
   /**

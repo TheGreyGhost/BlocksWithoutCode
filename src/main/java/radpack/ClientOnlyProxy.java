@@ -31,10 +31,14 @@ public class ClientOnlyProxy extends CommonProxy
   {
     super.init();
 
-    Item itemTabIcon = GameRegistry.findItem("radpack", "radpacktabicon");
-    ModelResourceLocation itemTabIconRL = new ModelResourceLocation("radpack:radpacktabicon", "inventory");
     final int DEFAULT_ITEM_SUBTYPE = 0;
-    Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemTabIcon, DEFAULT_ITEM_SUBTYPE, itemTabIconRL);
+
+    for (int i = 0; i < creativeTabCount; ++i) {
+      String name = "radpacktabicon" + (i+1);
+      Item itemBlock = GameRegistry.findItem("radpack", name);
+      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
+      Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+    }
 
     for (int i = 0; i < blockSolidCount; ++i) {
       String name = "blocksolid" + (i+1);

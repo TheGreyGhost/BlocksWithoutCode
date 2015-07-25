@@ -1,8 +1,14 @@
 config.blocksolids=2
 config.blockcutouts=1
 config.blocktranslucents=1
+config.creativetabs=2
 tile.blocksolid1.name=Dishwasher Silver
+tile.blocksolid1.tab=1
 tile.blocksolid2.name=Solid Block 2 Name
+tile.blocksolid2.tab=2
 tile.blockcutout1.name=Cutout Block 1 Name
+tile.blockcutout1.tab=1
 tile.blocktranslucent1.name=Translucent Block 1 Name
-itemGroup.radpacktab=RadPack Blocks
+tile.blocktranslucent1.tab=1
+itemGroup.radpacktab1=RadPack Blocks
+itemGroup.radpacktab2=More RadPack Blocks

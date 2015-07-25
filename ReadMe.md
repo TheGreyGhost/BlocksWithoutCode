@@ -12,8 +12,14 @@ a) change the "config.blocksolids=2" line in en_US.lang to equal the number of s
 b) for each block, add a blockstates file with filename blockstates/blocksolid1.json, blocksolid2.json, etc
 c) for each block, add a block model file (eg models/blocks/blocksolid2model.json)
 d) for each block, add a item model file (eg models/item/blocksolid1.json)
-e) for each block, add its name to the en_US.lang file eg
+e) for each block, add its name to the en_US.lang file (eg tile.blocksolid1.name=Dishwasher Silver)
 
 As well as solid blocks, you can do the same for "CUTOUT" blocks and for "TRANSLUCENT" blocks, which have a different appearance
-
 see here http://greyminecraftcoder.blogspot.com.au/2014/12/block-rendering-18.html
+
+To create one or more creative tabs:
+a) change the "config.creativetabs=1" line in en_US.lang to equal the number of creative tabs you have
+b) name each tab in en_US.lang (eg itemGroup.radpacktab1=Tab Name1  itemGroup.radpacktab2=Tab Name2 etc)
+c) create an item model for each tab (eg models/item/radpacktab1.json)
+d) assign each block to a tab in en_US.lang (eg tile.blocksolid1.tab=1)
+
