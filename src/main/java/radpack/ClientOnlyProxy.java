@@ -1,11 +1,9 @@
 package radpack;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -21,6 +19,33 @@ public class ClientOnlyProxy extends CommonProxy
   public void preInit()
   {
     super.preInit();
+
+    final int DEFAULT_ITEM_SUBTYPE = 0;
+
+    for (int i = 0; i < creativeTabCount; ++i) {
+      String name = "radpacktabicon" + (i+1);
+      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
+      ModelLoader.setCustomModelResourceLocation(RadPack.proxy.itemTabIcons[i], DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+    }
+
+    for (int i = 0; i < blockSolidCount; ++i) {
+      String name = "blocksolid" + (i+1);
+      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
+      ModelLoader.setCustomModelResourceLocation(RadPack.proxy.itemBlockSolids[i], DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+    }
+
+    for (int i = 0; i < blockCutoutCount; ++i) {
+      String name = "blockcutout" + (i+1);
+      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
+      ModelLoader.setCustomModelResourceLocation(RadPack.proxy.itemBlockCutouts[i], DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+    }
+
+    for (int i = 0; i < blockTranslucentCount; ++i) {
+      String name = "blocktranslucent" + (i+1);
+      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
+      ModelLoader.setCustomModelResourceLocation(RadPack.proxy.itemBlockTranslucents[i], DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+    }
+
   }
 
   /**
@@ -30,37 +55,6 @@ public class ClientOnlyProxy extends CommonProxy
   public void init()
   {
     super.init();
-
-    final int DEFAULT_ITEM_SUBTYPE = 0;
-
-    for (int i = 0; i < creativeTabCount; ++i) {
-      String name = "radpacktabicon" + (i+1);
-      Item itemBlock = GameRegistry.findItem("radpack", name);
-      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
-      Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
-    }
-
-    for (int i = 0; i < blockSolidCount; ++i) {
-      String name = "blocksolid" + (i+1);
-      Item itemBlock = GameRegistry.findItem("radpack", name);
-      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
-      Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
-    }
-
-    for (int i = 0; i < blockCutoutCount; ++i) {
-      String name = "blockcutout" + (i+1);
-      Item itemBlock = GameRegistry.findItem("radpack", name);
-      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
-      Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
-    }
-
-    for (int i = 0; i < blockTranslucentCount; ++i) {
-      String name = "blocktranslucent" + (i+1);
-      Item itemBlock = GameRegistry.findItem("radpack", name);
-      ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("radpack:" + name, "inventory");
-      Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
-    }
-
   }
 
   /**
